@@ -45,24 +45,24 @@ jobs:
         uses: actions/checkout@v3
         if: github.event.pull_request.base.ref == 'staging' || github.ref == 'refs/heads/staging'
         with:
-          repository: technologiestiftung/giessdenkiez-de-postgres-api
+          repository: digifarm-ms/giessdenkiez-de-postgres-api
           path: api
           ref: staging
       - name: Get the source for the api master
         uses: actions/checkout@v3
         if: github.event.pull_request.base.ref == 'master' || github.ref == 'refs/heads/master'
         with:
-          repository: technologiestiftung/giessdenkiez-de-postgres-api
+          repository: digifarm-ms/giessdenkiez-de-postgres-api
           path: api
       - uses: supabase/setup-cli@v1
         with:
           version: 1.33.0
       - name: build the harvester
-        run: cd harvester && docker build --tag technologiestiftung/giessdenkiez-de-dwd-harvester:test .
+        run: cd harvester && docker build --tag digifarm-ms/giessdenkiez-de-dwd-harvester:test .
       - name: Start the api
         run: cd api && supabase start && cd ..
       - name: run the harvester
-        run: docker run --env PG_SERVER='0.0.0.0' --env PG_DB --env PG_PORT --env PG_USER --env PG_PASS --env AWS_SECRET_ACCESS_KEY --env AWS_ACCESS_KEY_ID --env S3_BUCKET --env MAPBOXTOKEN --env MAPBOXUSERNAME --env LOGGING --env OUTPUT --network host technologiestiftung/giessdenkiez-de-dwd-harvester:test
+        run: docker run --env PG_SERVER='0.0.0.0' --env PG_DB --env PG_PORT --env PG_USER --env PG_PASS --env AWS_SECRET_ACCESS_KEY --env AWS_ACCESS_KEY_ID --env S3_BUCKET --env MAPBOXTOKEN --env MAPBOXUSERNAME --env LOGGING --env OUTPUT --network host digifarm-ms/giessdenkiez-de-dwd-harvester:test
       - name: stop the api
         run: cd api && supabase stop && cd ..
   release:
