@@ -56,6 +56,8 @@ Copy the `sample.env` file and rename to `.env` then update the parameters, most
 
 ## Running
 
+### Preparing the Buffer Shape
+
 `harvester/prepare.py` shows how the assets/buffer.shp was created. If a bigger buffer is needed, change the `INPUT_SHAPEFILE_BUFFER` parameter accordingly and re-run.
 
 ### Creating the Grid Structure
